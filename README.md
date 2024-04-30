@@ -23,6 +23,8 @@ In this project, we have implemented and compared various state-of-the-art CNN a
 
 As a next step, we implement the above mentioned Explainable AI techniques on the classification results of ResNet60 on the ovarian tumor dataset in order to interpret the classification. This interpretation helps to identify the important features or highlight the regions of interest which influence the final classification output - benign or malignant.
 
+The dataset will be available if requested.
+
 Steps to run the repository:
 
 1. Clone the main branch of this repo: git clone https://github.com/srirupa-guha/Explainable_AI_Ovarian_Tumor_Classification.git
