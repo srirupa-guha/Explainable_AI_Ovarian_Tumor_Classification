@@ -123,7 +123,7 @@ def load_data():
 
     return training_set, val_set, test_set
 
-def load_model():
+def load_model_VGG19():
 
     vgg19_model = keras.applications.vgg19.VGG19()
     vgg19_model.summary()
@@ -141,14 +141,14 @@ def load_model():
 
     return model
 
-def train_model(model, training_set, val_set, test_set):
+def train_model_VGG19(model, training_set, val_set, test_set):
 
     model.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
     history = model.fit(training_set, steps_per_epoch = 20, validation_data = test_set, validation_steps = 20, epochs = 200, verbose = 2)
 
     return history
 
-def plot_train_test_graph(history):
+def plot_train_test_graph(history, model_version):
 
     plt.rcParams["figure.figsize"] = (18,9)
 
@@ -164,7 +164,7 @@ def plot_train_test_graph(history):
     pyplot.plot(history.history['accuracy'], label='train')
     pyplot.plot(history.history['val_accuracy'], label='test')
     pyplot.legend()
-    pyplot.savefig('/content/drive/MyDrive/Assignments/Assignment 1/TrainTest_LossAccuracy_Graph_VGG19.png')
+    pyplot.savefig('/content/drive/MyDrive/Assignments/Assignment 1/TrainTest_LossAccuracy_Graph_' + model_version + '.png')
     pyplot.show()
 
 def classification(model, test_set):
@@ -180,7 +180,7 @@ def classification(model, test_set):
 
     return true_classes, predicted_classes, class_labels
 
-def classification_metrics(true_classes, predicted_classes, class_labels):
+def classification_metrics(true_classes, predicted_classes, class_labels, model_version):
 
     report = metrics.classification_report(true_classes, predicted_classes, target_names=class_labels)
     print(report)
@@ -199,6 +199,5 @@ def classification_metrics(true_classes, predicted_classes, class_labels):
     ax.xaxis.set_ticklabels(['Benign', 'Malignant'],fontsize=14)
     ax.yaxis.set_ticklabels(['Benign', 'Malignant'],fontsize=14)
 
-    plt.savefig('/content/drive/MyDrive/Paper_Publications_Files/Paper_3/Confusion_Matrix_VGG19.png')
-
+    plt.savefig('/content/drive/MyDrive/Paper_Publications_Files/Paper_3/Confusion_Matrix' + model_version + '.png')
 

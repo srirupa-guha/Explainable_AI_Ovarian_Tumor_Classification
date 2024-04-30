@@ -13,6 +13,7 @@ import matplotlib.pyplot
 import matplotlib.pyplot as plt
 import sklearn.metrics as metrics
 import seaborn as sns
+from matplotlib import pyplot
 
 def load_data():
 
@@ -251,7 +252,7 @@ def inception_v4(nb_classes = 1, load_weights = True):
 
     return model
 
-def load_model():
+def load_model_InceptionV4():
 
     inception_v4 = inception_v4()
     inception_v4.summary()
@@ -262,12 +263,13 @@ def load_model():
 
     return model 
 
-def train_model(model, training_set, val_set, test_set):
+def train_model_InceptionV4(model, training_set, val_set, test_set):
 
     model.compile(optimizer='adam',loss='binary_crossentropy',metrics=['accuracy'])
     history = model.fit(training_set,steps_per_epoch = 10,epochs = 200,validation_data = val_set,validation_steps = 5)
+    return history 
 
-def plot_train_test_graph(history):
+def plot_train_test_graph(history, model_version):
 
     plt.rcParams["figure.figsize"] = (18,9)
 
@@ -283,7 +285,7 @@ def plot_train_test_graph(history):
     pyplot.plot(history.history['accuracy'], label='train')
     pyplot.plot(history.history['val_accuracy'], label='test')
     pyplot.legend()
-    pyplot.savefig('/content/drive/MyDrive/Assignments/Assignment 1/TrainTest_LossAccuracy_Graph_EfficientNetB0.png')
+    pyplot.savefig('/content/drive/MyDrive/Assignments/Assignment 1/TrainTest_LossAccuracy_Graph_' + model_version + '.png')
     pyplot.show()
 
 def classification(model, test_set):
@@ -299,7 +301,7 @@ def classification(model, test_set):
 
     return true_classes, predicted_classes, class_labels
 
-def classification_metrics(true_classes, predicted_classes, class_labels):
+def classification_metrics(true_classes, predicted_classes, class_labels, model_version):
 
     report = metrics.classification_report(true_classes, predicted_classes, target_names=class_labels)
     print(report)
@@ -318,4 +320,4 @@ def classification_metrics(true_classes, predicted_classes, class_labels):
     ax.xaxis.set_ticklabels(['Benign', 'Malignant'],fontsize=14)
     ax.yaxis.set_ticklabels(['Benign', 'Malignant'],fontsize=14)
 
-    plt.savefig('/content/drive/MyDrive/Paper_Publications_Files/Paper_3/Confusion_Matrix_InceptionV4.png')
+    plt.savefig('/content/drive/MyDrive/Paper_Publications_Files/Paper_3/Confusion_Matrix' + model_version + '.png')

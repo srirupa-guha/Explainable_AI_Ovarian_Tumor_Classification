@@ -59,8 +59,8 @@ def LIME(images_inc_im, model):
     ax1.axis('off')
     ax2.axis('off')
 
-def run_LIME():
-    url = '/content/drive/MyDrive/Academic_Courses_and_ML_Projects/Paper_Publications_Files/Paper_3/Model_Training_Dataset/Train/Malignant/Folder_20_3_1_img4.jpg'
-    model = load_model('/content/drive/MyDrive/Academic_Courses_and_ML_Projects/Paper_Publications_Files/Paper_3/Ovarian_Image_classification_ResNet60.h5')
-    images_inc_im = transform_img_fn_ori(url)
+def run_LIME(image_url, model):
+    #url = '/content/drive/MyDrive/Academic_Courses_and_ML_Projects/Paper_Publications_Files/Paper_3/Model_Training_Dataset/Train/Malignant/Folder_20_3_1_img4.jpg'
+    #model = load_model('/content/drive/MyDrive/Academic_Courses_and_ML_Projects/Paper_Publications_Files/Paper_3/Ovarian_Image_classification_ResNet60.h5')
+    images_inc_im = transform_img_fn_ori(image_url)
     LIME(images_inc_im, model)

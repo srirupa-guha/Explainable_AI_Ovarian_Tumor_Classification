@@ -52,11 +52,12 @@ def Smooth_Grad(NUM_ITERATIONS, shap_values_list, sample_image, explainer):
         shap.image_plot(shap_values, perturbed_image_batch)
         shap_values_list.append(shap_values)
 
-def run_SHAP():
+def run_SHAP(image_path, model):
 
-    images_dir = 'content/drive/MyDrive/Academic_Courses_and_ML_Projects/Paper_Publications_Files/Paper_3/Annotated_Images/Annotated_Dataset/Benign'
-    model = load_model('/content/drive/MyDrive/Academic_Courses_and_ML_Projects/Paper_Publications_Files/Paper_3/Ovarian_Image_classification_ResNet60.h5')
-    x_test = cv2.imread('/content/drive/MyDrive/Academic_Courses_and_ML_Projects/Paper_Publications_Files/Paper_3/Annotated_Images/Annotated_Dataset/Malignant/69.jpg')
+    #images_dir = 'content/drive/MyDrive/Academic_Courses_and_ML_Projects/Paper_Publications_Files/Paper_3/Annotated_Images/Annotated_Dataset/Benign'
+    #model = load_model('/content/drive/MyDrive/Academic_Courses_and_ML_Projects/Paper_Publications_Files/Paper_3/Ovarian_Image_classification_ResNet60.h5')
+    #x_test = cv2.imread('/content/drive/MyDrive/Academic_Courses_and_ML_Projects/Paper_Publications_Files/Paper_3/Annotated_Images/Annotated_Dataset/Malignant/69.jpg')
+    x_test = cv2.imread(image_path)
 
     x_test = cv2.resize(x_test, (224, 224))
     x_test = np.expand_dims(x_test, axis=0)
@@ -74,6 +75,10 @@ def run_SHAP():
     sample_image_batch = np.expand_dims(sample_image, axis=0)  # Add batch dimension
 
     shap_values, explainer = SHAP(x_test, model, sample_image_batch)
+
+    return sample_image, explainer
+
+def run_Smooth_Grad(sample_image, explainer):
 
     # Now implementing the SmoothGrad algorithm
 

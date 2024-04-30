@@ -41,9 +41,9 @@ def SaliencyMap(model2, score, x):
     plt.tight_layout()
     plt.show()
 
-def run_SaliencyMap():
+def run_SaliencyMap(img_path, model):
 
-    img_path = '/content/drive/MyDrive/Academic_Courses_and_ML_Projects/Paper_Publications_Files/Paper_3/Annotated_Images/Annotated_Dataset/Malignant/Folder_21_3_1_img11.jpg'
+    #img_path = '/content/drive/MyDrive/Academic_Courses_and_ML_Projects/Paper_Publications_Files/Paper_3/Annotated_Images/Annotated_Dataset/Malignant/Folder_21_3_1_img11.jpg'
     
     img = tf.keras.preprocessing.image.load_img(img_path,target_size=(224,224))
     x = img_to_array(img)  # Numpy array with shape (300, 300, 3)
@@ -52,8 +52,8 @@ def run_SaliencyMap():
     plt.imshow(img)
 
     layer_name = 'fc_3'
-    model = load_model('/content/drive/MyDrive/Academic_Courses_and_ML_Projects/Paper_Publications_Files/Paper_3/Ovarian_Image_classification_ResNet60.h5')
-    model.summary()
+    # model = load_model('/content/drive/MyDrive/Academic_Courses_and_ML_Projects/Paper_Publications_Files/Paper_3/Ovarian_Image_classification_ResNet60.h5')
+    # model.summary()
 
     model2 = model
     model2.layers[-1].activation = tf.keras.activations.linear

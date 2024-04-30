@@ -115,7 +115,7 @@ def pred(func_model, image):
         print(func_model.get_layer(index = idx).name)
     # we picked `block5c_project_con` layer
 
-def run_GRADCAM(i, image):
+def run_GRADCAM(func_model, i, image):
 
     icam = GradCAM(func_model, i, 'bn6c_branch2c')
 

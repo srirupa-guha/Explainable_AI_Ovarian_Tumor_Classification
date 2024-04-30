@@ -145,7 +145,7 @@ def load_data():
 
     return training_set, val_set, test_set
 
-def load_model():
+def load_model_ResNet60():
 
     base_model = ResNet60(input_shape=(224, 224, 3))
 
@@ -162,13 +162,15 @@ def load_model():
     dot_img_file = '/content/drive/MyDrive/Paper_Publications_Files/Paper_3/ResNet60.png'
     tf.keras.utils.plot_model(model, to_file=dot_img_file, show_shapes=True)
 
-def train_model(model, training_set, val_set):
+    return model
+
+def train_model_ResNet60(model, training_set, val_set):
 
     model.compile(optimizer='adam',loss='binary_crossentropy',metrics=['accuracy'])
     history = model.fit(training_set,steps_per_epoch = 10,epochs = 200,validation_data = val_set,validation_steps = 5)
     return history
 
-def plot_train_test_graph(history):
+def plot_train_test_graph(history, model_name):
 
     plt.rcParams["figure.figsize"] = (18,9)
 
@@ -184,7 +186,7 @@ def plot_train_test_graph(history):
     pyplot.plot(history.history['accuracy'], label='train')
     pyplot.plot(history.history['val_accuracy'], label='val')
     pyplot.legend()
-    pyplot.savefig('/content/drive/MyDrive/Paper_Publications_Files/Paper_3/TrainTest_LossAccuracy_Graph_ResNet60.png')
+    pyplot.savefig('/content/drive/MyDrive/Paper_Publications_Files/Paper_3/TrainTest_LossAccuracy_Graph_' + model_name + '.png')
     pyplot.show()
 
 def classification(model, test_set):
@@ -200,7 +202,7 @@ def classification(model, test_set):
 
     return true_classes, predicted_classes, class_labels
 
-def classification_metrics(true_classes, predicted_classes, class_labels):
+def classification_metrics(true_classes, predicted_classes, class_labels, model_version):
 
     report = metrics.classification_report(true_classes, predicted_classes, target_names=class_labels)
     print(report)
@@ -219,7 +221,7 @@ def classification_metrics(true_classes, predicted_classes, class_labels):
     ax.xaxis.set_ticklabels(['Benign', 'Malignant'],fontsize=14)
     ax.yaxis.set_ticklabels(['Benign', 'Malignant'],fontsize=14)
 
-    plt.savefig('/content/drive/MyDrive/Paper_Publications_Files/Paper_3/Confusion_Matrix_ResNet60.png')
+    plt.savefig('/content/drive/MyDrive/Paper_Publications_Files/Paper_3/Confusion_Matrix' + model_version + '.png')
 
 
 

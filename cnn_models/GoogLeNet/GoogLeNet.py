@@ -164,20 +164,20 @@ def GoogLeNet(nb_classes = 2):
 
   return model
 
-def load_model():
+def load_model_GoogleNet():
    
    model = GoogLeNet()
    model.summary()
 
    return model
 
-def train_model(model, training_set, val_set):
+def train_model_GoogleNet(model, training_set, val_set):
    
    model.compile(optimizer='adam',loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),metrics=['accuracy'])
    history = model.fit(training_set,steps_per_epoch = 10,epochs = 200,validation_data = val_set,validation_steps = 5)
    return history
 
-def plot_train_test_graph(history):
+def plot_train_test_graph(history, model_version):
 
     plt.rcParams["figure.figsize"] = (18,9)
 
@@ -193,7 +193,7 @@ def plot_train_test_graph(history):
     pyplot.plot(history.history['accuracy'], label='train')
     pyplot.plot(history.history['val_accuracy'], label='test')
     pyplot.legend()
-    pyplot.savefig('/content/drive/MyDrive/Assignments/Assignment 1/TrainTest_LossAccuracy_Graph_EfficientNetB0.png')
+    pyplot.savefig('/content/drive/MyDrive/Assignments/Assignment 1/TrainTest_LossAccuracy_Graph_' + model_version + '.png')
     pyplot.show()
 
 def classification(model, test_set):
@@ -209,7 +209,7 @@ def classification(model, test_set):
 
     return true_classes, predicted_classes, class_labels
 
-def classification_metrics(true_classes, predicted_classes, class_labels):
+def classification_metrics(true_classes, predicted_classes, class_labels, model_version):
 
     report = metrics.classification_report(true_classes, predicted_classes, target_names=class_labels)
     print(report)
@@ -228,6 +228,6 @@ def classification_metrics(true_classes, predicted_classes, class_labels):
     ax.xaxis.set_ticklabels(['Benign', 'Malignant'],fontsize=14)
     ax.yaxis.set_ticklabels(['Benign', 'Malignant'],fontsize=14)
 
-    plt.savefig('/content/drive/MyDrive/Paper_Publications_Files/Paper_3/Confusion_Matrix_GoogLeNet.png')
+    plt.savefig('/content/drive/MyDrive/Paper_Publications_Files/Paper_3/Confusion_Matrix' + model_version + '.png')
 
 

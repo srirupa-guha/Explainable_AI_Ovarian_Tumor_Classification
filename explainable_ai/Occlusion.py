@@ -69,9 +69,9 @@ def Occlusion_exp(image_path, occluding_size, occluding_pixel, occluding_stride,
     plt.show()
     print ( 'Object index is %s'%index_object)
 
-def run_Occlusion():
+def run_Occlusion(image_path, model):
     
-    image_path = '/content/drive/MyDrive/Academic_Courses_and_ML_Projects/Paper_Publications_Files/Paper_3/Annotated_Images/Annotated_Dataset/Malignant/Folder_21_3_1_img11.jpg'
+    #image_path = '/content/drive/MyDrive/Academic_Courses_and_ML_Projects/Paper_Publications_Files/Paper_3/Annotated_Images/Annotated_Dataset/Malignant/Folder_21_3_1_img11.jpg'
     im = cv2.imread(image_path)
     print(im.shape)
 
@@ -79,6 +79,6 @@ def run_Occlusion():
     occluding_pixel = 0
     occluding_stride = 1
 
-    model = load_model('/content/drive/MyDrive/Academic_Courses_and_ML_Projects/Paper_Publications_Files/Paper_3/Ovarian_Image_classification_ResNet60.h5')
+    #model = load_model('/content/drive/MyDrive/Academic_Courses_and_ML_Projects/Paper_Publications_Files/Paper_3/Ovarian_Image_classification_ResNet60.h5')
 
     Occlusion_exp(image_path, occluding_size, occluding_pixel, occluding_stride, model)
